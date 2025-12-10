@@ -7,6 +7,6 @@ class Carrera(models.Model):
     fecha_creacion_car=models.DateField()
     telefono_car=models.CharField(max_length=10)
 
-    def __str__(self):
+    def __str__(self):            #para que te muestre el nombre de las carreras en el panel de adm.
         return self.nombre_car
     
