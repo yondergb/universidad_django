@@ -13,6 +13,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+    <script src="{% static 'js/messages.js' %}"></script>
 </head>
 
 <body>
@@ -53,6 +56,14 @@
   </div>
 </nav>
     <main>{% block contenido %}{% endblock contenido %}</main>
+    {% for messages in messages %}
+      <script>
+        iziToast.success({
+        title: '¡Éxito!',
+        message: '{{messages}}',
+        });
+      </script>
+    {% endfor %}
 </body>
 <script 
   src="{% static 'library/bootstrap/bootstrap.js' %}"

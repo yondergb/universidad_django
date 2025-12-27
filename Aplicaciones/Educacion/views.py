@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Carrera
+from django.contrib import messages
 
 # Create your views here.
 def inicio(request):
@@ -18,11 +19,13 @@ def crear_carrera(request):
         telefono = request.POST['telefono_car']
 
         Carrera.objects.create(nombre_car=nombre, fecha_creacion_car=fecha_creacion, telefono_car=telefono)
+        messages.success(request, 'La Carrera se ha creado correctamente')
         return redirect('/carreras')
 
 def eliminar_carrera(request, id):
     carreraDb = Carrera.objects.get(id_car=id)
     carreraDb.delete()
+    messages.success(request, 'Carrera eliminada de la BD')
     return redirect('/carreras')
 
 def editar_carrera(request, id):
@@ -44,6 +47,7 @@ def procesar_editar_carrera(request):
         carrera_editar.fecha_creacion_car = fecha_creacion
         carrera_editar.telefono_car = telefono
         carrera_editar.save()
+        messages.success(request, 'Carrera actualizada correctamente')
 
         return redirect('/carreras')
 
