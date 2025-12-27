@@ -1,0 +1,53 @@
+{% extends 'plantilla.html' %} {% load static %}
+{% block titulo %}
+    <title>Editar Carrera</title>
+{% endblock titulo %}
+
+{% block contenido %}
+    <div class="conteiner">
+        <h1 class="mt-4 text-center">Editar Carrera</h1>
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Carrera</h1>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'procesar_editar_carrera' %}" method="post">
+            {% csrf_token %}
+            <input type="text" value="{{carrera.id_car}}" hidden name="id_car" id="id_car"/>
+            <div class="mb-4">
+                <label for="" class="form-label">Nombre</label>
+                <input type="text" placeholder="Sistemas Operativos" id="nombre_car" name="nombre_car"
+                required class="form-control" value="{{carrera.nombre_car}}" />
+            </div>
+            <div class="mb-4">
+                <label for="" class="form-label">Fecha creación</label>
+                <input type="date" id="fecha_creacion_car" name="fecha_creacion_car"
+                required class="form-control" value="{{carrera.fecha_creacion_car|date:'Y-m-d'}}" />
+            </div>
+            <div class="mb-4">
+                <label for="" class="form-label">Teléfono</label>
+                <input type="text" placeholder="04129985421" id="telefono_car" name="telefono_car"
+                required class="form-control" value="{{carrera.telefono_car}}" />
+            </div>
+            <div class="modal-footer">
+              <a href="{% url 'carreras' %}" type="button" class="btn btn-secondary">Cancelar</a>
+              <button type="submit" class="btn btn-primary">Actualizar Carrera</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+   const modal = document.getElementById("exampleModal");
+   document.addEventListener('DOMContentLoaded', () => {
+    const myModal = new bootstrap.Modal(modal);
+    myModal.show();
+   });  
+</script>
+{% endblock contenido %}
+

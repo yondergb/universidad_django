@@ -29,7 +29,7 @@
                         <td>{{carrera.fecha_creacion_car}}</td>
                         <td>{{carrera.telefono_car}}</td>
                         <td>
-                            <a href="" class="btn badge bg-info">Editar</a>
+                            <a href="{% url 'editar_carrera' carrera.id_car %}" class="btn badge bg-info">Editar</a>
                             <a href="{% url 'eliminar_carrera' carrera.id_car %}" class="btn badge bg-danger">Eliminar</a>
                         </td>
                     </tr>
