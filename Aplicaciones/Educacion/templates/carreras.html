@@ -1,0 +1,83 @@
+{% extends 'plantilla.html' %} {% load static %}
+{% block titulo %}
+    <title>Universidad Carreras</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<div class="conteiner">
+    <h1 class="text-center mt-4">Carreras</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    + Agregar Carrera
+    </button>
+    {% if carreras %}
+    <div class="table-responsive">
+        <table class="table table-hover table-striped text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha de creación</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+               
+            </thead>
+            <tbody>
+                {% for carrera in carreras %}
+                    <tr>
+                        <td>{{carrera.nombre_car}}</td>
+                        <td>{{carrera.fecha_creacion_car}}</td>
+                        <td>{{carrera.telefono_car}}</td>
+                        <td>
+                            <a href="" class="btn badge bg-info">Editar</a>
+                            <a href="{% url 'eliminar_carrera' carrera.id_car %}" class="btn badge bg-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    {% else %}
+    <div class="alert alert-warning nt-4 text-center">
+        No hay Carreras Registradas en la Base de Datos
+    </div>
+    {% endif %}
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Carrera</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'crear_carrera' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="" class="form-label">Nombre</label>
+                <input type="text" placeholder="Sistemas Operativos" id="nombre_car" name="nombre_car"
+                required class="form-control" />
+            </div>
+            <div class="mb-4">
+                <label for="" class="form-label">Fecha creación</label>
+                <input type="date" id="fecha_creacion_car" name="fecha_creacion_car"
+                required class="form-control" />
+            </div>
+            <div class="mb-4">
+                <label for="" class="form-label">Teléfono</label>
+                <input type="text" placeholder="04129985421" id="telefono_car" name="telefono_car"
+                required class="form-control" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock contenido %}
