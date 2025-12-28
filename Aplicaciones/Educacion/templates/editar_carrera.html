@@ -31,7 +31,9 @@
             <div class="mb-4">
                 <label for="" class="form-label">Teléfono</label>
                 <input type="text" placeholder="04129985421" id="telefono_car" name="telefono_car"
-                required class="form-control" value="{{carrera.telefono_car}}" />
+                required class="form-control" value="{{carrera.telefono_car}}" 
+                oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                maxlength="10"/>
             </div>
             <div class="modal-footer">
               <a href="{% url 'carreras' %}" type="button" class="btn btn-secondary">Cancelar</a>
